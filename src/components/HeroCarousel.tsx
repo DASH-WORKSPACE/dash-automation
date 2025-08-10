@@ -44,35 +44,41 @@ const HeroCarousel = () => {
   return (
     <div className="py-8 px-4">
       <div className="container mx-auto">
-        <Carousel className="w-full max-w-6xl mx-auto">
-          <CarouselContent>
+        <Carousel 
+          className="w-full max-w-6xl mx-auto"
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
             {slides.map((slide, index) => (
-              <CarouselItem key={index}>
-                <Card className="border-0 overflow-hidden">
+              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2">
+                <Card className="border-0 overflow-hidden h-full">
                   <CardContent className="p-0">
-                    <div className="relative h-[400px] lg:h-[450px] bg-gradient-to-r from-primary/90 to-primary-hover/90">
+                    <div className="relative h-[300px] lg:h-[350px] bg-gradient-to-r from-primary/90 to-primary-hover/90">
                       <div 
                         className="absolute inset-0 bg-cover bg-center opacity-30"
                         style={{ backgroundImage: `url(${slide.image})` }}
                       />
                       <div className="relative z-10 h-full flex items-center">
-                        <div className="container mx-auto px-8">
-                          <div className="max-w-2xl text-white">
-                            <h1 className="text-4xl lg:text-6xl font-bold mb-2 animate-fade-in">
+                        <div className="px-6">
+                          <div className="text-white">
+                            <h1 className="text-2xl lg:text-3xl font-bold mb-2 animate-fade-in">
                               {slide.title}
                             </h1>
-                            <h2 className="text-2xl lg:text-3xl font-semibold mb-4 text-primary-foreground/90 animate-fade-in">
+                            <h2 className="text-lg lg:text-xl font-semibold mb-3 text-primary-foreground/90 animate-fade-in">
                               {slide.subtitle}
                             </h2>
-                            <p className="text-lg lg:text-xl mb-6 text-primary-foreground/80 animate-fade-in">
+                            <p className="text-sm lg:text-base mb-4 text-primary-foreground/80 animate-fade-in line-clamp-2">
                               {slide.description}
                             </p>
                             <Button 
-                              size="lg" 
-                              className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-3 animate-scale-in"
+                              size="sm" 
+                              className="bg-white text-primary hover:bg-white/90 font-semibold px-6 py-2 animate-scale-in"
                             >
                               {slide.buttonText}
-                              <ArrowRight className="ml-2 h-5 w-5" />
+                              <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
                           </div>
                         </div>
