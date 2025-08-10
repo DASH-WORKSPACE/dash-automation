@@ -13,9 +13,11 @@ const Index = () => {
       <TrendingExams />
       <Navigation />
       
-      <div className="relative">
-        <ExamCategories />
-        <div className="absolute top-0 right-0 hidden lg:block">
+      <div className="lg:flex lg:gap-6 lg:items-start">
+        <div className="lg:flex-1">
+          <ExamCategories />
+        </div>
+        <div className="hidden lg:block lg:w-80 lg:flex-shrink-0">
           <RecentNotifications />
         </div>
       </div>

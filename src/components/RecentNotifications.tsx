@@ -15,9 +15,9 @@ const RecentNotifications = () => {
   ];
 
   return (
-    <div className="py-6 px-4">
-      <div className="container mx-auto">
-        <div className="max-w-sm mx-auto lg:mx-0 lg:ml-auto">
+    <div className="py-8 px-4">
+      <div className="w-full">
+        <div className="max-w-sm mx-auto lg:mx-0">
           <Card className="bg-exam-card border-2">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-2 text-lg">
