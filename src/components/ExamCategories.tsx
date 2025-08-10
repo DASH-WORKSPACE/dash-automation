@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import RecentNotifications from "@/components/RecentNotifications";
 import { 
   Shield, 
   Users, 
@@ -85,35 +86,50 @@ const ExamCategories = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          {categories.map((category, index) => (
-            <Card 
-              key={index} 
-              className="hover:shadow-xl transition-all duration-300 cursor-pointer group border-2 hover:border-primary bg-exam-card"
-              onClick={() => handleCategoryClick(category)}
-            >
-              <CardContent className="p-6 text-center">
-                <div className="mb-4 flex justify-center">
-                  <div className={`p-4 rounded-full bg-gray-100 group-hover:bg-primary/10 transition-colors`}>
-                    <category.icon className={`w-8 h-8 ${category.color} group-hover:text-primary transition-colors`} />
-                  </div>
-                </div>
-                <h3 className="font-semibold text-card-foreground text-lg mb-1">
-                  {category.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {category.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="lg:flex lg:gap-6 lg:items-start">
+          {/* Categories Section */}
+          <div className="lg:flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {categories.map((category, index) => (
+                <Card 
+                  key={index} 
+                  className="hover:shadow-xl transition-all duration-300 cursor-pointer group border-2 hover:border-primary bg-exam-card"
+                  onClick={() => handleCategoryClick(category)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="mb-4 flex justify-center">
+                      <div className={`p-4 rounded-full bg-gray-100 group-hover:bg-primary/10 transition-colors`}>
+                        <category.icon className={`w-8 h-8 ${category.color} group-hover:text-primary transition-colors`} />
+                      </div>
+                    </div>
+                    <h3 className="font-semibold text-card-foreground text-lg mb-1">
+                      {category.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {category.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="text-center">
+              <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
+                <ChevronDown className="w-5 h-5" />
+                <span>More Exams</span>
+              </Button>
+            </div>
+          </div>
+
+          {/* Recent Notifications Section */}
+          <div className="hidden lg:block lg:w-80 lg:flex-shrink-0">
+            <RecentNotifications />
+          </div>
         </div>
 
-        <div className="text-center">
-          <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
-            <ChevronDown className="w-5 h-5" />
-            <span>More Exams</span>
-          </Button>
+        {/* Mobile notifications */}
+        <div className="lg:hidden mt-8">
+          <RecentNotifications />
         </div>
       </div>
     </div>
