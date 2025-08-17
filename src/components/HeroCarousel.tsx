@@ -53,7 +53,7 @@ const HeroCarousel = () => {
         >
           <CarouselContent className="-ml-1 md:-ml-2">
             {slides.map((slide, index) => (
-              <CarouselItem key={index} className="pl-1 md:pl-2 basis-4/5 md:basis-2/5">
+              <CarouselItem key={index} className="pl-1 md:pl-2 basis-3/4 md:basis-1/4">
                 <Card className="border-0 overflow-hidden h-full">
                   <CardContent className="p-0">
                     <div className="relative h-[300px] lg:h-[350px] bg-gradient-to-r from-primary/90 to-primary-hover/90">
