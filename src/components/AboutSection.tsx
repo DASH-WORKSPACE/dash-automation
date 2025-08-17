@@ -43,18 +43,18 @@ const AboutSection = () => {
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
         {/* About DASH Section */}
-        <div className="mb-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-stretch">
+        <div className="mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-stretch">
             {/* DASH Info Card */}
-            <div className="lg:col-span-1">
+            <div className="lg:col-span-2">
               <Card className="h-full bg-primary/5 border-primary/20">
-                <CardContent className="p-8 flex flex-col justify-center h-full">
-                  <h2 className="text-4xl font-bold text-primary mb-4">
+                <CardContent className="p-10 flex flex-col justify-center h-full min-h-[320px]">
+                  <h2 className="text-5xl font-bold text-primary mb-6">
                     D<span className="text-orange-500">A</span>
                     <span className="text-green-600">S</span>
                     <span className="text-blue-600">H</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-base text-muted-foreground leading-relaxed">
                     DASH automates form-filling, captcha-solving, and integrates with DigiLocker for 
                     easy document management. It also enables seamless access to phone files from a 
                     laptop, simplifying digital tasks and saving time.
@@ -64,17 +64,17 @@ const AboutSection = () => {
             </div>
 
             {/* Feature Cards */}
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-8">
               {features.map((feature, index) => (
-                <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50">
-                  <CardContent className="p-6 flex flex-col items-center text-center h-full">
-                    <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                      <feature.icon className="w-8 h-8 text-primary" />
+                <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50 min-h-[320px]">
+                  <CardContent className="p-8 flex flex-col items-center text-center h-full">
+                    <div className="w-20 h-20 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                      <feature.icon className="w-10 h-10 text-primary" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-3 text-foreground">
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                    <p className="text-base text-muted-foreground leading-relaxed flex-grow">
                       {feature.description}
                     </p>
                   </CardContent>
@@ -86,14 +86,14 @@ const AboutSection = () => {
 
         {/* New in DASH Section */}
         <div>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-stretch">
             {/* Section Title */}
             <div className="lg:col-span-1">
-              <div className="h-full flex flex-col justify-center">
-                <h2 className="text-3xl font-bold text-foreground mb-2">
+              <div className="h-full flex flex-col justify-center min-h-[280px]">
+                <h2 className="text-4xl font-bold text-foreground mb-2">
                   New In
                 </h2>
-                <h2 className="text-3xl font-bold text-primary">
+                <h2 className="text-4xl font-bold text-primary">
                   D<span className="text-orange-500">A</span>
                   <span className="text-green-600">S</span>
                   <span className="text-blue-600">H</span>
@@ -102,18 +102,18 @@ const AboutSection = () => {
             </div>
 
             {/* New Feature Cards */}
-            <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {newFeatures.map((feature, index) => (
-                <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <h3 className="text-lg font-semibold mb-3 text-foreground">
+                <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 min-h-[280px]">
+                  <CardContent className="p-8 flex flex-col h-full">
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
+                    <p className="text-base text-muted-foreground leading-relaxed flex-grow">
                       {feature.description}
                     </p>
-                    <div className="mt-4 pt-4 border-t border-border/50">
-                      <span className="text-xs text-primary font-medium">Coming Soon</span>
+                    <div className="mt-6 pt-4 border-t border-border/50">
+                      <span className="text-sm text-primary font-medium">Coming Soon</span>
                     </div>
                   </CardContent>
                 </Card>
