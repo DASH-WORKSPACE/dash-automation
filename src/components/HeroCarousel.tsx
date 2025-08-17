@@ -45,15 +45,15 @@ const HeroCarousel = () => {
     <div className="py-8 px-4">
       <div className="container mx-auto">
         <Carousel 
-          className="w-full max-w-6xl mx-auto"
+          className="w-full max-w-7xl mx-auto"
           opts={{
-            align: "start",
+            align: "center",
             loop: true,
           }}
         >
-          <CarouselContent className="-ml-2 md:-ml-4">
+          <CarouselContent className="-ml-1 md:-ml-2">
             {slides.map((slide, index) => (
-              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2">
+              <CarouselItem key={index} className="pl-1 md:pl-2 basis-4/5 md:basis-2/5">
                 <Card className="border-0 overflow-hidden h-full">
                   <CardContent className="p-0">
                     <div className="relative h-[300px] lg:h-[350px] bg-gradient-to-r from-primary/90 to-primary-hover/90">
