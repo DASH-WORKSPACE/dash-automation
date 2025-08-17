@@ -5,6 +5,7 @@ import TrendingExams from "@/components/TrendingExams";
 import Navigation from "@/components/Navigation";
 import ExamCategories from "@/components/ExamCategories";
 import ScholarshipsSection from "@/components/ScholarshipsSection";
+import AboutSection from "@/components/AboutSection";
 
 const Index = () => {
   return (
@@ -17,6 +18,7 @@ const Index = () => {
       
       <ExamCategories />
       <ScholarshipsSection />
+      <AboutSection />
     </div>
   );
 };
