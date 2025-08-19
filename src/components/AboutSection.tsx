@@ -102,10 +102,10 @@ const AboutSection = () => {
             </div>
 
             {/* New Feature Cards */}
-            <div className="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {newFeatures.map((feature, index) => (
-                <Card key={index} className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 min-h-[280px]">
-                  <CardContent className="p-8 flex flex-col h-full">
+                <Card key={index} className="aspect-square hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 max-w-[200px] w-full">
+                  <CardContent className="p-4 flex flex-col h-full justify-between">
                     <h3 className="text-xl font-semibold mb-4 text-foreground">
                       {feature.title}
                     </h3>
