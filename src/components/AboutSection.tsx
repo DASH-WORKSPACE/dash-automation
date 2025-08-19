@@ -22,20 +22,20 @@ const AboutSection = () => {
 
   const newFeatures = [
     {
-      title: "AI-Powered Analytics",
-      description: "Advanced insights and performance tracking for better decision making."
+      title: "AI Analytics",
+      description: "Advanced insights and tracking."
     },
     {
       title: "Enhanced Security",
-      description: "Multi-layer security protocols to protect your sensitive data and documents."
+      description: "Multi-layer data protection."
     },
     {
-      title: "Mobile App Integration",
-      description: "Seamless synchronization between desktop and mobile applications."
+      title: "Mobile Integration",
+      description: "Desktop and mobile sync."
     },
     {
-      title: "Cloud Storage Expansion",
-      description: "Increased storage capacity with faster sync speeds and reliability."
+      title: "Cloud Storage",
+      description: "Increased capacity and speed."
     }
   ];
 
@@ -105,16 +105,14 @@ const AboutSection = () => {
             <div className="lg:col-span-5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {newFeatures.map((feature, index) => (
                 <Card key={index} className="aspect-square hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 max-w-[200px] w-full">
-                  <CardContent className="p-4 flex flex-col h-full justify-between">
-                    <h3 className="text-xl font-semibold mb-4 text-foreground">
+                  <CardContent className="p-4 flex flex-col h-full justify-center text-center">
+                    <span className="text-xs text-primary font-medium mb-2">Coming Soon</span>
+                    <h3 className="text-lg font-semibold mb-2 text-foreground">
                       {feature.title}
                     </h3>
-                    <p className="text-base text-muted-foreground leading-relaxed flex-grow">
+                    <p className="text-sm text-muted-foreground">
                       {feature.description}
                     </p>
-                    <div className="mt-6 pt-4 border-t border-border/50">
-                      <span className="text-sm text-primary font-medium">Coming Soon</span>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
