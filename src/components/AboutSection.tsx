@@ -47,7 +47,7 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-stretch">
             {/* DASH Info Card */}
             <div className="lg:col-span-2">
-              <Card className="h-full bg-primary/5 border-primary/20">
+              <Card className="h-full bg-primary/5">
                 <CardContent className="p-10 flex flex-col justify-center h-full min-h-[320px]">
                   <h2 className="text-5xl font-bold text-primary mb-6">
                     D<span className="text-orange-500">A</span>
