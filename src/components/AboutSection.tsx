@@ -86,40 +86,31 @@ const AboutSection = () => {
 
         {/* New in DASH Section */}
         <div>
-          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-stretch">
             {/* Section Title */}
-            <div className="lg:col-span-2">
-              <Card className="h-full bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
-                <CardContent className="p-8 flex flex-col justify-center h-full min-h-[200px]">
-                  <div className="space-y-3">
-                    <h2 className="text-3xl font-bold text-foreground">
-                      New In
-                    </h2>
-                    <h2 className="text-3xl font-bold">
-                      D<span className="text-orange-500">A</span>
-                      <span className="text-green-600">S</span>
-                      <span className="text-blue-600">H</span>
-                    </h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Exciting new features and improvements coming to enhance your digital experience.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="lg:col-span-1">
+              <div className="h-full flex flex-col justify-center min-h-[280px]">
+                <h2 className="text-4xl font-bold text-foreground mb-2">
+                  New In
+                </h2>
+                <h2 className="text-4xl font-bold text-primary">
+                  D<span className="text-orange-500">A</span>
+                  <span className="text-green-600">S</span>
+                  <span className="text-blue-600">H</span>
+                </h2>
+              </div>
             </div>
 
             {/* New Feature Cards */}
-            <div className="lg:col-span-4 grid grid-cols-2 gap-6">
+            <div className="lg:col-span-5 grid grid-cols-2 md:grid-cols-4 gap-6">
               {newFeatures.map((feature, index) => (
-                <Card key={index} className="aspect-square hover:shadow-lg transition-all duration-300 border-border/50 bg-card/50 hover:border-primary/30">
-                  <CardContent className="p-6 flex flex-col h-full justify-center text-center">
-                    <span className="text-xs text-primary font-medium mb-3 px-2 py-1 bg-primary/10 rounded-full">
-                      Coming Soon
-                    </span>
-                    <h3 className="text-lg font-semibold mb-3 text-foreground">
+                <Card key={index} className="aspect-square hover:shadow-lg transition-shadow duration-300 border-border/50 bg-card/50 max-w-[200px] w-full">
+                  <CardContent className="p-4 flex flex-col h-full justify-center text-center">
+                    <span className="text-xs text-primary font-medium mb-2">Coming Soon</span>
+                    <h3 className="text-lg font-semibold mb-2 text-foreground">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-muted-foreground">
                       {feature.description}
                     </p>
                   </CardContent>
