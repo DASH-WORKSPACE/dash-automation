@@ -5,11 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter } from "lucide-react";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter, List as ListIcon, LayoutGrid, Eye } from "lucide-react";
 
 const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
+  const [viewMode, setViewMode] = useState<"list" | "grid">("list");
 
   const jobs = [
     {
@@ -126,7 +129,7 @@ const Jobs = () => {
           </p>
         </div>
 
-        {/* Search and Filter Section */}
+        {/* Search, Filter and View Toggle */}
         <div className="mb-8 space-y-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
@@ -153,74 +156,134 @@ const Jobs = () => {
               </SelectContent>
             </Select>
           </div>
+
+          <div className="flex justify-end">
+            <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "list" | "grid")}> 
+              <TabsList>
+                <TabsTrigger value="list">
+                  <ListIcon className="w-4 h-4 mr-2" /> List View
+                </TabsTrigger>
+                <TabsTrigger value="grid">
+                  <LayoutGrid className="w-4 h-4 mr-2" /> Tile View
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
         </div>
 
-        {/* Jobs Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredJobs.map((job) => (
-            <Card key={job.id} className="hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
-                <div className="flex justify-between items-start mb-2">
-                  <Badge variant="secondary">
-                    {job.department}
-                  </Badge>
-                  <Badge variant={job.status === "Active" ? "default" : "destructive"}>
-                    {job.status}
-                  </Badge>
-                </div>
-                <CardTitle className="text-xl">
-                  {job.title}
-                </CardTitle>
-                <p className="text-muted-foreground font-medium">
-                  {job.organization}
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground line-clamp-2">
-                  {job.description}
-                </p>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="w-4 h-4 text-primary" />
-                      <span>Last Date: {new Date(job.lastDate).toLocaleDateString()}</span>
+        {/* Views */}
+        {viewMode === "list" ? (
+          <Card>
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-12">#</TableHead>
+                    <TableHead>Job Title</TableHead>
+                    <TableHead className="min-w-[140px]">Last Date</TableHead>
+                    <TableHead className="min-w-[120px]">Status</TableHead>
+                    <TableHead className="text-right">Action</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredJobs.map((job, index) => (
+                    <TableRow key={job.id}>
+                      <TableCell className="font-medium">{index + 1}</TableCell>
+                      <TableCell>
+                        <div className="flex flex-col">
+                          <span className="text-base font-medium text-foreground hover:underline cursor-pointer">
+                            {job.title}
+                          </span>
+                          <span className="text-sm text-muted-foreground">{job.organization}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center gap-2">
+                          <Calendar className="w-4 h-4 text-primary" />
+                          <span>{new Date(job.lastDate).toLocaleDateString()}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant={job.status === "Active" ? "default" : "destructive"}>{job.status}</Badge>
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <Button variant="outline" size="sm">
+                          <Eye className="w-4 h-4 mr-2" /> View
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {filteredJobs.map((job) => (
+              <Card key={job.id} className="hover:shadow-lg transition-shadow duration-300">
+                <CardHeader>
+                  <div className="flex justify-between items-start mb-2">
+                    <Badge variant="secondary">
+                      {job.department}
+                    </Badge>
+                    <Badge variant={job.status === "Active" ? "default" : "destructive"}>
+                      {job.status}
+                    </Badge>
+                  </div>
+                  <CardTitle className="text-xl">
+                    {job.title}
+                  </CardTitle>
+                  <p className="text-muted-foreground font-medium">
+                    {job.organization}
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground line-clamp-2">
+                    {job.description}
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <Calendar className="w-4 h-4 text-primary" />
+                        <span>Last Date: {new Date(job.lastDate).toLocaleDateString()}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Briefcase className="w-4 h-4 text-primary" />
+                        <span>Posts: {job.posts}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4 text-primary" />
+                        <span>{job.location}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Briefcase className="w-4 h-4 text-primary" />
-                      <span>Posts: {job.posts}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <MapPin className="w-4 h-4 text-primary" />
-                      <span>{job.location}</span>
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <IndianRupee className="w-4 h-4 text-primary" />
+                        <span>{job.salary}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium">Qualification: </span>
+                        <span>{job.qualification}</span>
+                      </div>
+                      <div>
+                        <span className="font-medium">Experience: </span>
+                        <span>{job.experience}</span>
+                      </div>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-2">
-                      <IndianRupee className="w-4 h-4 text-primary" />
-                      <span>{job.salary}</span>
-                    </div>
-                    <div>
-                      <span className="font-medium">Qualification: </span>
-                      <span>{job.qualification}</span>
-                    </div>
-                    <div>
-                      <span className="font-medium">Experience: </span>
-                      <span>{job.experience}</span>
-                    </div>
-                  </div>
-                </div>
 
-                <div className="flex justify-between items-center pt-4 border-t">
-                  <Badge variant="outline">{job.type}</Badge>
-                  <Button>
-                    Apply Now
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                  <div className="flex justify-between items-center pt-4 border-t">
+                    <Badge variant="outline">{job.type}</Badge>
+                    <Button>
+                      Apply Now
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
 
         {filteredJobs.length === 0 && (
           <div className="text-center py-12">
