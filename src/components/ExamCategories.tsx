@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import RecentNotifications from "@/components/RecentNotifications";
+import { Link } from "react-router-dom";
 import { 
   Shield, 
   Users, 
@@ -73,8 +74,8 @@ const ExamCategories = () => {
   ];
 
   const handleCategoryClick = (category: ExamCategory) => {
-    // This would navigate to exam selection and auto-fill form
-    console.log(`Selected category: ${category.title}`);
+    // Navigate to exams page with category filter
+    window.location.href = '/exams';
   };
 
   return (
@@ -114,10 +115,12 @@ const ExamCategories = () => {
             </div>
 
             <div className="text-center">
-              <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
-                <ChevronDown className="w-5 h-5" />
-                <span>More Exams</span>
-              </Button>
+              <Link to="/exams">
+                <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
+                  <ChevronDown className="w-5 h-5" />
+                  <span>More Exams</span>
+                </Button>
+              </Link>
             </div>
           </div>
 

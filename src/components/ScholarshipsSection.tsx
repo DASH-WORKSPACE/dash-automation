@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import RecentNotifications from "@/components/RecentNotifications";
+import { Link } from "react-router-dom";
 import { 
   GraduationCap, 
   Stethoscope, 
@@ -73,7 +74,7 @@ const ScholarshipsSection = () => {
   ];
 
   const handleCategoryClick = (category: ScholarshipCategory) => {
-    console.log(`Selected scholarship category: ${category.title}`);
+    window.location.href = '/scholarships';
   };
 
   return (
@@ -113,10 +114,12 @@ const ScholarshipsSection = () => {
             </div>
 
             <div className="text-center">
-              <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
-                <ChevronDown className="w-5 h-5" />
-                <span>More Options</span>
-              </Button>
+              <Link to="/scholarships">
+                <Button variant="outline" size="lg" className="flex items-center space-x-2 mx-auto">
+                  <ChevronDown className="w-5 h-5" />
+                  <span>More Options</span>
+                </Button>
+              </Link>
             </div>
           </div>
 
