@@ -7,12 +7,17 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter, List as ListIcon, LayoutGrid, Eye } from "lucide-react";
+import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter, List as ListIcon, LayoutGrid, Eye, CheckCircle } from "lucide-react";
 
 const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("all");
   const [viewMode, setViewMode] = useState<"list" | "grid">("list");
+  const [appliedJobs, setAppliedJobs] = useState<Record<number, boolean>>({});
+
+  const markApplied = (jobId: number) => {
+    setAppliedJobs((prev) => ({ ...prev, [jobId]: true }));
+  };
 
   const jobs = [
     {
@@ -180,7 +185,7 @@ const Jobs = () => {
                   <TableRow>
                     <TableHead className="w-12">#</TableHead>
                     <TableHead>Job Title</TableHead>
-                    <TableHead className="min-w-[140px]">Last Date</TableHead>
+                    <TableHead className="min-w-[140px]">Deadline</TableHead>
                     <TableHead className="min-w-[120px]">Status</TableHead>
                     <TableHead className="text-right">Action</TableHead>
                   </TableRow>
@@ -207,9 +212,20 @@ const Jobs = () => {
                         <Badge variant={job.status === "Active" ? "default" : "destructive"}>{job.status}</Badge>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="outline" size="sm">
-                          <Eye className="w-4 h-4 mr-2" /> View
-                        </Button>
+                        <div className="flex justify-end gap-2">
+                          <Button variant="outline" size="sm">
+                            <Eye className="w-4 h-4 mr-2" /> View
+                          </Button>
+                          {appliedJobs[job.id] ? (
+                            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white" disabled>
+                              <CheckCircle className="w-4 h-4 mr-2" /> Applied
+                            </Button>
+                          ) : (
+                            <Button size="sm" variant="outline" onClick={() => markApplied(job.id)}>
+                              <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> Apply
+                            </Button>
+                          )}
+                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -246,7 +262,7 @@ const Jobs = () => {
                     <div className="space-y-2">
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-4 h-4 text-primary" />
-                        <span>Last Date: {new Date(job.lastDate).toLocaleDateString()}</span>
+                        <span>Deadline: {new Date(job.lastDate).toLocaleDateString()}</span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <Briefcase className="w-4 h-4 text-primary" />
@@ -275,9 +291,15 @@ const Jobs = () => {
 
                   <div className="flex justify-between items-center pt-4 border-t">
                     <Badge variant="outline">{job.type}</Badge>
-                    <Button>
-                      Apply Now
-                    </Button>
+                    {appliedJobs[job.id] ? (
+                      <Button className="bg-green-600 hover:bg-green-700 text-white" disabled>
+                        <CheckCircle className="w-4 h-4 mr-2" /> Applied
+                      </Button>
+                    ) : (
+                      <Button variant="outline" onClick={() => markApplied(job.id)}>
+                        <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> Apply
+                      </Button>
+                    )}
                   </div>
                 </CardContent>
               </Card>
