@@ -89,7 +89,7 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 lg:grid-cols-6 gap-8 items-stretch">
             {/* Section Title */}
             <div className="lg:col-span-1">
-              <div className="h-full flex flex-col justify-center min-h-[280px]">
+              <div className="h-full flex flex-col justify-center">
                 <h2 className="text-4xl font-bold text-foreground mb-2">
                   New In
                 </h2>
