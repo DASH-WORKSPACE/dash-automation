@@ -11,6 +11,7 @@ import Jobs from "./pages/Jobs";
 import Results from "./pages/Results";
 import AdmitCards from "./pages/AdmitCards";
 import Scholarships from "./pages/Scholarships";
+import Dashboard from "./pages/Dashboard";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/exams" element={<Exams />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/results" element={<Results />} />

@@ -1,11 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { UserCircle, LogIn, Home, Briefcase, Award, CreditCard, GraduationCap } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { UserCircle, LogIn, Home, Briefcase, Award, CreditCard, GraduationCap, LogOut } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "@/components/ui/use-toast";
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showNav, setShowNav] = useState(false);
+  const [user, setUser] = useState<any>(null);
 
   const navItems = [
     { icon: Home, label: "Home", path: "/" },
@@ -23,6 +27,22 @@ const Header = () => {
     setShowNav(!isLandingPage);
   }, [isLandingPage]);
 
+  // Check authentication status
+  useEffect(() => {
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user || null);
+    };
+
+    checkUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   // Listen for scroll progress from Index page
   useEffect(() => {
     const handleScrollProgress = (event: CustomEvent) => {
@@ -36,6 +56,15 @@ const Header = () => {
     window.addEventListener('scrollProgress', handleScrollProgress as EventListener);
     return () => window.removeEventListener('scrollProgress', handleScrollProgress as EventListener);
   }, [isLandingPage]);
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out successfully",
+      description: "You have been logged out of your account.",
+    });
+    navigate("/");
+  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
@@ -81,18 +110,35 @@ const Header = () => {
 
           {/* Auth Buttons */}
           <div className="flex items-center space-x-2">
-            <Link to="/auth" className="hidden sm:block">
-              <Button variant="ghost" size="sm" className="flex items-center space-x-2">
-                <LogIn className="w-4 h-4" />
-                <span className="hidden lg:inline">Sign In</span>
-              </Button>
-            </Link>
-            <Link to="/auth">
-              <Button size="sm" className="flex items-center space-x-2">
-                <UserCircle className="w-4 h-4" />
-                <span className="hidden lg:inline">Sign-Up</span>
-              </Button>
-            </Link>
+            {user ? (
+              <>
+                <Link to="/dashboard" className="hidden sm:block">
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                    <UserCircle className="w-4 h-4" />
+                    <span className="hidden lg:inline">Dashboard</span>
+                  </Button>
+                </Link>
+                <Button variant="ghost" size="sm" onClick={handleSignOut} className="flex items-center space-x-2">
+                  <LogOut className="w-4 h-4" />
+                  <span className="hidden lg:inline">Sign Out</span>
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to="/auth" className="hidden sm:block">
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+                    <LogIn className="w-4 h-4" />
+                    <span className="hidden lg:inline">Sign In</span>
+                  </Button>
+                </Link>
+                <Link to="/auth">
+                  <Button size="sm" className="flex items-center space-x-2">
+                    <UserCircle className="w-4 h-4" />
+                    <span className="hidden lg:inline">Sign Up</span>
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
