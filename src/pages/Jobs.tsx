@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter, List as ListIcon, LayoutGrid, Eye, CheckCircle } from "lucide-react";
+import { Search, Calendar, MapPin, Briefcase, IndianRupee, Filter, List as ListIcon, LayoutGrid, Eye, CheckCircle, Users } from "lucide-react";
 
 const Jobs = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,6 +28,7 @@ const Jobs = () => {
       description: "Recruitment for Junior Engineer posts in various government departments",
       lastDate: "2025-03-20",
       posts: "1200",
+      vacancy: "1,247",
       location: "All India",
       salary: "₹35,400 - ₹1,12,400",
       qualification: "Diploma in Civil Engineering",
@@ -43,6 +44,7 @@ const Jobs = () => {
       description: "Sub Inspector recruitment in Delhi Police Force",
       lastDate: "2025-03-15",
       posts: "857",
+      vacancy: "892",
       location: "Delhi",
       salary: "₹35,400 - ₹1,12,400",
       qualification: "Graduate",
@@ -58,6 +60,7 @@ const Jobs = () => {
       description: "Assistant Manager (Credit) recruitment in Bank of Baroda",
       lastDate: "2025-02-28",
       posts: "600",
+      vacancy: "634",
       location: "Pan India",
       salary: "₹48,170 - ₹1,68,300",
       qualification: "Post Graduate",
@@ -73,6 +76,7 @@ const Jobs = () => {
       description: "Station Master recruitment in various railway zones",
       lastDate: "2025-03-25",
       posts: "2500",
+      vacancy: "2,847",
       location: "All Zones",
       salary: "₹35,400 - ₹1,12,400",
       qualification: "Graduate",
@@ -88,6 +92,7 @@ const Jobs = () => {
       description: "Forest Guard recruitment in various state forest departments",
       lastDate: "2025-03-12",
       posts: "800",
+      vacancy: "956",
       location: "Multiple States",
       salary: "₹25,500 - ₹81,100",
       qualification: "12th Pass",
@@ -103,6 +108,7 @@ const Jobs = () => {
       description: "Medical Officer recruitment in All India Institute of Medical Sciences",
       lastDate: "2025-04-01",
       posts: "150",
+      vacancy: "178",
       location: "Delhi",
       salary: "₹56,100 - ₹1,77,500",
       qualification: "MBBS",
@@ -126,16 +132,28 @@ const Jobs = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Latest Government Jobs</h1>
-          <p className="text-muted-foreground text-lg">
+      <div className="container mx-auto px-4 py-4">
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <h1 className="text-3xl font-bold text-foreground">Latest Government Jobs</h1>
+            <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "list" | "grid")}> 
+              <TabsList>
+                <TabsTrigger value="list">
+                  <ListIcon className="w-4 h-4 mr-2" /> List View
+                </TabsTrigger>
+                <TabsTrigger value="grid">
+                  <LayoutGrid className="w-4 h-4 mr-2" /> Tile View
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+          <p className="text-muted-foreground">
             Discover the latest government job openings across various departments
           </p>
         </div>
 
-        {/* Search, Filter and View Toggle */}
-        <div className="mb-8 space-y-4">
+        {/* Search and Filter */}
+        <div className="mb-4">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
@@ -161,19 +179,6 @@ const Jobs = () => {
               </SelectContent>
             </Select>
           </div>
-
-          <div className="flex justify-end">
-            <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "list" | "grid")}> 
-              <TabsList>
-                <TabsTrigger value="list">
-                  <ListIcon className="w-4 h-4 mr-2" /> List View
-                </TabsTrigger>
-                <TabsTrigger value="grid">
-                  <LayoutGrid className="w-4 h-4 mr-2" /> Tile View
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
         </div>
 
         {/* Views */}
@@ -183,46 +188,53 @@ const Jobs = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-12">#</TableHead>
-                    <TableHead>Job Title</TableHead>
-                    <TableHead className="min-w-[140px]">Deadline</TableHead>
-                    <TableHead className="min-w-[120px]">Status</TableHead>
-                    <TableHead className="text-right">Action</TableHead>
+                    <TableHead className="w-12 py-3">#</TableHead>
+                    <TableHead className="py-3">Job Title</TableHead>
+                    <TableHead className="min-w-[140px] py-3">Deadline</TableHead>
+                    <TableHead className="min-w-[100px] py-3">Vacancy</TableHead>
+                    <TableHead className="min-w-[120px] py-3">Status</TableHead>
+                    <TableHead className="text-right py-3">Action</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredJobs.map((job, index) => (
                     <TableRow key={job.id}>
-                      <TableCell className="font-medium">{index + 1}</TableCell>
-                      <TableCell>
-                        <div className="flex flex-col">
-                          <span className="text-base font-medium text-foreground hover:underline cursor-pointer">
+                      <TableCell className="font-medium py-2 text-sm">{index + 1}</TableCell>
+                      <TableCell className="py-2">
+                        <div className="flex flex-col space-y-1">
+                          <span className="text-sm font-medium text-foreground hover:underline cursor-pointer">
                             {job.title}
                           </span>
-                          <span className="text-sm text-muted-foreground">{job.organization}</span>
+                          <span className="text-xs text-muted-foreground">{job.organization}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-primary" />
-                          <span>{new Date(job.lastDate).toLocaleDateString()}</span>
+                      <TableCell className="py-2">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-primary" />
+                          <span className="text-sm">{new Date(job.lastDate).toLocaleDateString()}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <Badge variant={job.status === "Active" ? "default" : "destructive"}>{job.status}</Badge>
+                      <TableCell className="py-2">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-3 h-3 text-primary" />
+                          <span className="text-sm font-medium">{job.vacancy}</span>
+                        </div>
                       </TableCell>
-                      <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button variant="outline" size="sm">
-                            <Eye className="w-4 h-4 mr-2" /> View
+                      <TableCell className="py-2">
+                        <Badge variant={job.status === "Active" ? "default" : "destructive"} className="text-xs">{job.status}</Badge>
+                      </TableCell>
+                      <TableCell className="text-right py-2">
+                        <div className="flex justify-end gap-1">
+                          <Button variant="outline" size="sm" className="h-7 px-2 text-xs">
+                            <Eye className="w-3 h-3 mr-1" /> View
                           </Button>
                           {appliedJobs[job.id] ? (
-                            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white" disabled>
-                              <CheckCircle className="w-4 h-4 mr-2" /> Applied
+                            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white h-7 px-2 text-xs" disabled>
+                              <CheckCircle className="w-3 h-3 mr-1" /> Applied
                             </Button>
                           ) : (
-                            <Button size="sm" variant="outline" onClick={() => markApplied(job.id)}>
-                              <CheckCircle className="w-4 h-4 mr-2 text-green-600" /> Apply
+                            <Button size="sm" variant="outline" onClick={() => markApplied(job.id)} className="h-7 px-2 text-xs">
+                              <CheckCircle className="w-3 h-3 mr-1 text-green-600" /> Apply
                             </Button>
                           )}
                         </div>

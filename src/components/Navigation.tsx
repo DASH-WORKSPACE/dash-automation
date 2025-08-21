@@ -21,10 +21,10 @@ const Navigation = () => {
             <Link key={index} to={item.path}>
               <Button
                 variant={location.pathname === item.path ? "default" : "outline"}
-                size="lg"
+                size="default"
                 className="flex items-center space-x-2 whitespace-nowrap"
               >
-                <item.icon className="w-5 h-5" />
+                <item.icon className="w-4 h-4" />
                 <span>{item.label}</span>
               </Button>
             </Link>

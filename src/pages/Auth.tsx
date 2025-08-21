@@ -42,9 +42,11 @@ const Auth = () => {
         
         <Card className="shadow-xl">
           <CardHeader className="text-center">
-            <div className="bg-primary text-primary-foreground px-4 py-2 rounded-md font-bold text-2xl mb-4 w-fit mx-auto">
-              DASH
-            </div>
+            <img 
+              src="/logo.png" 
+              alt="DASH Logo" 
+              className="h-12 w-auto mx-auto mb-4"
+            />
             <CardTitle>Welcome</CardTitle>
             <CardDescription>
               Sign in to your account or create a new one
